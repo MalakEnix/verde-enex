@@ -1,0 +1,9 @@
+streamlit
+pandas
+numpy
+scikit-learn
+shap
+huggingface_hub
+openpyxl
+matplotlib
+seaborn
