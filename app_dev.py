@@ -805,7 +805,7 @@ Your guiding motto is:
     messages = [{"role": "system", "content": system_prompt}]
     messages.extend(st.session_state.enix_messages)
 
-     try:
+try:
             response = groq_client.chat.completions.create(
                 model="llama-3.3-70b-versatile",
                 messages=messages,
