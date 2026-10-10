@@ -815,7 +815,7 @@ try:
 
             answer = response.choices[0].message.content
 
-        except Exception as groq_error:
+except Exception as groq_error:
             print(
                 "GROQ ERROR:",
                 type(groq_error).__name__,
