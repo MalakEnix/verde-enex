@@ -804,7 +804,6 @@ Your guiding motto is:
 
     messages = [{"role": "system", "content": system_prompt}]
     messages.extend(st.session_state.enix_messages)
-
 try:
             response = groq_client.chat.completions.create(
                 model="llama-3.3-70b-versatile",
@@ -812,10 +811,9 @@ try:
                 temperature=0.30,
                 max_tokens=350
             )
-
             answer = response.choices[0].message.content
 
-except Exception as groq_error:
+        except Exception as groq_error:
             print(
                 "GROQ ERROR:",
                 type(groq_error).__name__,
@@ -831,7 +829,6 @@ except Exception as groq_error:
                     presence_penalty=0.45,
                     frequency_penalty=0.55
                 )
-
                 answer = response.choices[0].message.content
 
             except Exception as hf_error:
@@ -840,9 +837,8 @@ except Exception as groq_error:
                     type(hf_error).__name__,
                     str(hf_error)[:500]
                 )
-
                 answer = (
-                    "I’m temporarily unable to connect to my "
+                    "I'm temporarily unable to connect to my "
                     "environmental intelligence services. "
                     "Please try again in a moment."
                 )
@@ -852,7 +848,6 @@ except Exception as groq_error:
             r'\1',
             answer
         )
-
         answer = answer.strip()
 
     st.session_state.enix_messages.append(
