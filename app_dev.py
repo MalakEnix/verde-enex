@@ -805,18 +805,55 @@ Your guiding motto is:
     messages = [{"role": "system", "content": system_prompt}]
     messages.extend(st.session_state.enix_messages)
 
-    try:
-        response = client.chat.completions.create(
-            model="meta-llama/Llama-3.1-8B-Instruct",
-            messages=messages,
-            temperature=0.4
+     try:
+            response = groq_client.chat.completions.create(
+                model="llama-3.1-8b-instant",
+                messages=messages,
+                temperature=0.30,
+                max_tokens=350
+            )
+
+            answer = response.choices[0].message.content
+
+        except Exception as groq_error:
+            print(
+                "GROQ ERROR:",
+                type(groq_error).__name__,
+                str(groq_error)[:500]
+            )
+
+            try:
+                response = client.chat.completions.create(
+                    model="meta-llama/Llama-3.1-8B-Instruct",
+                    messages=messages,
+                    temperature=0.30,
+                    max_tokens=350,
+                    presence_penalty=0.45,
+                    frequency_penalty=0.55
+                )
+
+                answer = response.choices[0].message.content
+
+            except Exception as hf_error:
+                print(
+                    "HF ERROR:",
+                    type(hf_error).__name__,
+                    str(hf_error)[:500]
+                )
+
+                answer = (
+                    "I’m temporarily unable to connect to my "
+                    "environmental intelligence services. "
+                    "Please try again in a moment."
+                )
+
+        answer = re.sub(
+            r'(.{20,}?)(\1){2,}',
+            r'\1',
+            answer
         )
-        answer = response.choices[0].message.content
-    except Exception:
-        answer = (
-            "I'm temporarily unable to connect "
-            "to my environmental intelligence service."
-        )
+
+        answer = answer.strip()
 
     st.session_state.enix_messages.append(
         {"role": "assistant", "content": answer}
