@@ -1,9 +1,11 @@
 import streamlit as st
 from huggingface_hub import InferenceClient
+from groq import Groq
 
 client = InferenceClient(
     token=st.secrets["HF_TOKEN"]
 )
+groq_client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 import pandas as pd
 import shap
 import streamlit.components.v1 as components
