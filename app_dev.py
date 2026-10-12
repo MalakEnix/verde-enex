@@ -804,8 +804,6 @@ Your guiding motto is:
 
     messages = [{"role": "system", "content": system_prompt}]
     messages.extend(st.session_state.enix_messages)
-messages = [{"role": "system", "content": system_prompt}]
-    messages.extend(st.session_state.enix_messages)
 
     try:
         response = groq_client.chat.completions.create(
