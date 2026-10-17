@@ -840,10 +840,9 @@ Your guiding motto is:
                 str(hf_error)[:500]
             )
             answer = (
-                "I'm temporarily unable to connect to my "
-                "environmental intelligence services. "
-                "Please try again in a moment."
-            )
+    f"GROQ ERROR: {type(groq_error).__name__}: {str(groq_error)}\n\n"
+    f"HF ERROR: {type(hf_error).__name__}: {str(hf_error)}"
+    )
 
     answer = re.sub(
         r'(.{20,}?)(\1){2,}',
