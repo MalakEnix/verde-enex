@@ -808,7 +808,7 @@ Your guiding motto is:
 
     try:
         response = groq_client.chat.completions.create(
-            model="meta-llama/llama-4-scout-17b-16e-instruct",
+            model="openai/gpt-oss-20b",
             messages=messages,
             temperature=0.30,
             max_tokens=350
