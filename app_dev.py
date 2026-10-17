@@ -808,7 +808,7 @@ Your guiding motto is:
 
     try:
         response = groq_client.chat.completions.create(
-            model="llama-3.1-8b-instant",
+            model="llama-4-scout-17b-16e-instruct",
             messages=messages,
             temperature=0.30,
             max_tokens=350
